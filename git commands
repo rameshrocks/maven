@@ -3,7 +3,7 @@ Git Commands:
 git --version
 git init --bare central.git
 git clone central.git  workspace1
-touch 1.java
+touch  1.java
 git add 1.java
 git commit -m "first commit"
 git log
