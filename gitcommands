@@ -39,6 +39,65 @@ git branch -D branch1       (to delete branch)
 git branch -a               (branches obtained from central repo)
 git checkout branch1
 
+echo "idea1" > file1
+echo "idea1" > file2
+git stash                   (undo the changes and take the backup)
+git stash list              (stash@{0} will display)
+echo "idea2" > file1
+echo "idea2" > file2
+git stash                       
+git stash list (stash@{0}, stash@{1} will display and stash@{0} is the latest one)
+git stash apply stash@{0}
+git stash clear
+
+
+touch f1
+echo aaaaaaa > f1
+git add .
+git commit -m " f1 commit"
+echo bbbbbbb >> f2
+git add .
+git reset --soft           (id will delete)
+git reset --mixed          (unstage)
+git reset --hard           (delete id & unstage & remove latest data)
+git reset                  (defaulty take --mixed)
+git revert 1234xyz         (to undo the commit)
+git checkout 1234xyz       (to go to the particular commit id location)
+git checkout branch1
+git checkout branch1@@1234xyz
+git checkout master
+git clean -f
+git tag -a release3.2.1 -m "test commit for release 3.2.1" 1234xyz
+git show release3.2.1
+git tag                  
+git push --tags
+git tag -d release3.2.1
+
+ 
+
+
+
+
+
+
+
+
+
+                              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
