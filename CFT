@@ -1,0 +1,20 @@
+CLOUD FORMATION is AWS service for provisioning the resources
+creatd resources in predictable(output) repeatable and automated way
+
+JSON Struture
+--------------
+AWS template format version= template version
+description = what json going to do
+metadata = properties
+parameters = values {keyname, dbname, dbuser, dbpassword, instance type, ssh location}
+mappings = dependencies
+conditions = conditions
+outputs = what stack will create
+resources = simple tamplate for s3 bucket
+Resources:
+  
+  S3BLD3O:
+
+    Type: 'AWS::S3::Bucket'
+
+    Properties: {}
