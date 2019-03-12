@@ -1,0 +1,89 @@
+---
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'This template enables CloudTrail and Config.  This should be run in every region in every AWS Account in the DBS Organization'
+
+Parameters:
+  S3ComplianceBucketName:
+    Description: "Name of CloudTrail S3 Bucket"
+    Type: String
+  SnsConfigTopicName:
+    Description: "Name of SNS Topic for Config"
+    Type: String
+  SecurityAccountId:
+    Description: "Security AccountID where SNS Topic for Config is hosted"
+    Type: String
+
+Conditions:
+  MasterRegion: !Equals [ !Ref "AWS::Region", ap-southeast-1 ]
+
+Resources:
+
+  ConfigRole:
+    Condition: MasterRegion
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: core-compliance-config-role
+      ManagedPolicyArns:
+      - 'arn:aws:iam::aws:policy/service-role/AWSConfigRole'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action:
+              - 'sts:AssumeRole'
+            Effect: 'Allow'
+            Principal:
+              Service:
+                - 'config.amazonaws.com'
+      Policies:
+        - PolicyName: 'BucketS3Policy'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action:
+                  - 's3:PutObject'
+                Effect: 'Allow'
+                Resource:
+                  !Sub |-
+                    arn:aws:s3:::${S3ComplianceBucketName}/AWSLogs/${AWS::AccountId}/Config/*
+                Condition:
+                  StringEquals:
+                    s3:x-amz-acl: "bucket-owner-full-control"
+              - Action:
+                  - 's3:GetBucketAcl'
+                Effect: 'Allow'
+                Resource:
+                  !Sub |-
+                    arn:aws:s3:::${S3ComplianceBucketName}
+        - PolicyName: 'SNSPolicy'
+          PolicyDocument:
+            Version: "2008-10-17"
+            Statement:
+              -
+                Effect: "Allow"
+                Resource:
+                  Fn::Sub:
+                    arn:aws:sns:${AWS::Region}:${SecurityAccountId}:${SnsConfigTopicName}
+                Action: "SNS:Publish"
+
+  ConfigRecorder:
+    Type: "AWS::Config::ConfigurationRecorder"
+    Properties:
+      Name: default
+      RecordingGroup:
+        AllSupported: true
+        IncludeGlobalResourceTypes: !If [MasterRegion, true, false]
+      RoleARN:
+        Fn::Sub:
+          arn:aws:iam::${AWS::AccountId}:role/core-compliance-config-role
+
+  DeliveryChannel:
+    Type: "AWS::Config::DeliveryChannel"
+    Properties:
+      ConfigSnapshotDeliveryProperties:
+        DeliveryFrequency: "Six_Hours"
+      S3BucketName:
+        Ref: S3ComplianceBucketName
+      SnsTopicARN:
+        Fn::Sub:
+          arn:aws:sns:${AWS::Region}:${SecurityAccountId}:${SnsConfigTopicName}
