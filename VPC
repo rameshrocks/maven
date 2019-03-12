@@ -1,0 +1,27 @@
+direct connect = it combines aws+datacenter as single network and we can connect through private ips
+VPC peering = we can combine vpcs in different availability zones
+VPC endpoint = to connet aws resources privately
+VPG = combines our vpc with ofice network and works as same network
+Private subnet = when servers doesnt need internet
+public subnet = public can access                       (in subnet out of 256 251 ips available)
+route tables = hold the information about routing
+EIP ENI(elastic network interface) = when we change the server we can use same EIP address by using ENI
+IG = acts as a door for the ib/ob trafic to the vpc
+VPG --VPN connection-- CPG 
+CIDR(class less inter domain range ) range
+8 +  8 + 8 + 8   = 32
+192.198.100.200
+10.0.0.2/16        (10.0 will not change)      65556 ips will be available
+10.0.0.2/24        (10.0.0 will not change)    256   ips will be available
+10.0.0.2/36        (single ip address)
+
+Security group                                                   NACL
+instance level                                                   subnetlevel
+allow rules                                                      allow/deny rules
+statefull                                                        stateless
+
+
+
+
+
+
