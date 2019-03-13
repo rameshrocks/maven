@@ -1,0 +1,27 @@
+#
+var="123456"
+echo "$var"
+#
+var= ls /etc
+echo $var
+#
+echo enter your name:
+read name
+echo hello $name
+#####backup file######
+#
+output_package=/opt/backup_$(date y%m%d).tar.gz
+tar -czf $output_package /home/a/keerti
+#
+echo "plz enter your name"
+read name
+hi $name
+echo "file is creating on the name of $name
+touch $name
+rm -rf 3
+#####FOR######
+#
+for i in 1 2 3 4 5
+do 
+echo "number $i"
+done
