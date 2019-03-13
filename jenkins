@@ -1,0 +1,177 @@
+Java  -jar jenkkins.war  --httpPort=8081
+vi /etc/default/jenkins   (to change port number)
+Jenkins.exe  stop          (services in windows)
+#### Upgrade jenkins version #######
+wget http://updates.jenkins-ci.org/download/war/2.9/jenkins.war
+cp /usr/lib/jenkins/jenkins.war /downloads/jenkins.war.previous.version
+cp /downloads/jenkins.war /usr/lib/jenkins/
+systemctl stop jenkins
+systemctl start jenkins
+java -jar jenkins-cli.jar -s http://localhost:8080/ version
+service jenkins stop
+mv JENKINS_HOME/config.xml JENKINS_HOME/config.xml_bak
+service jenkins start
+.NET project requirement =  ms build, nuget, nunit
+Msbuild file = ${WORKSPACE}/Practice/Practice.sln
+
+##########################################################################################################
+pipeline stage view plugin
+--------------------                                       ------------------
+declarative pipeline                                       scripted pipeline
+--------------------                                       ------------------
+recent feature                                             treditional way of writing the code
+simple groovy syntax                                       stricker groovy syntax
+code is written locally in a file checked into scm         code is written on jenkins UI
+code is defined with in a pipeline block                   code is defined with in a node block
+
+##########################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+######SONAR#######
+
+<pluginGroups>
+    <!-- pluginGroup
+     | Specifies a further group identifier to use for plugin lookup.
+    <pluginGroup>com.your.plugins</pluginGroup>
+	
+    -->
+	
+	 <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+  </pluginGroups>
+
+
+<profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <sonar.host.url>
+                  http://localhost:9000
+                </sonar.host.url>
+            </properties>
+        </profile>
+#######SONAR#######
