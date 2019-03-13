@@ -1,0 +1,43 @@
+#######linux######
+grep -r "172.168.77.44" ~/
+du -sh
+chsh -s /bin/bash username
+sudo ufw disable
+sudo ufw allow 22
+ps aux | grep yum
+kill -9 [pid:no]
+rm -rf /var/run/yum.pid 22331
+service iptables save    
+service iptables stop                          (firewall disable)
+chkconfig iptables off   
+service iptables start                          (firewall enable)
+chkconfig iptables on
+sudo useradd -s /bin/bash -m -d /home/user1 -G sudo user1
+cp -R * /home/tom/backup
+grep user /etc/passwd
+usermod --shell /bin/bash tecmint
+useradd -d /var/lib/jenkins jenkin
+sudo ifconfig eth0 192.168.0.111 netmask 255.255.255.0
+route add default gw 192.168.1.1
+yum remove docker* -y
+lsblk                                            (list of volumes)
+mkfs –t ext4 /dev/xvdf                           (make filesystem)
+mount /dev/xvdf /home/a/newvolume
+rm -v !(file1)                                   (to delete all files except file1)
+rm -i !(*.zip)                                   (except .zip)
+rm -v !(*.zip|*.exe)                             (except .zip and .exe)
+cp /opt/a/*.txt /opt/b/
+find / -type d -name "apt*" -ls
+ls -l | grep "abc" | wc -l                        (pipe)
+cat /etc/*osrelease*                              (to see the OS u on)
+fsck                                              (to ckeck the consistency of file system)
+fuser                                             (which process are using specified filesystem)
+free                                              (to check ram size)
+lsof           /proc/sys/fs/file                  (to see opened files)
+nproc                                             (no of cores)
+uptime                                            (load on cpu)
+dpkg -s apache2 | grep status                     (check the status of the package)
+locate 2.yml                                      (to search the file)
+find / -name "jenkins"                            (to search directory)
+
+
