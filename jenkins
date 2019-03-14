@@ -24,7 +24,9 @@ simple groovy syntax                                       stricker groovy synta
 code is written locally in a file checked into scm         code is written on jenkins UI
 code is defined with in a pipeline block                   code is defined with in a node block
 
-##########################################################################################################
+###########################################################################################################
+multibranch pipeline
+this project is parameterized
 
 
 
