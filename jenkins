@@ -27,6 +27,9 @@ code is defined with in a pipeline block                   code is defined with 
 ###########################################################################################################
 multibranch pipeline
 this project is parameterized
+how to reactivate deleted job  --    http://[url_of_jenkins]/jobConfigHistory/?filter=deleted
+forgot jenkins password
+
 
 
 
