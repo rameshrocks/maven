@@ -9,3 +9,6 @@ ssh-keygen –t rsa
 git push –set-upstream origin master –f
 
 git remote add origin https://github.com/ramsiri88/222/
+branch types     (custom, feature, hotfix, bugfix, release)
+
+
