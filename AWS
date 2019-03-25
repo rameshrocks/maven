@@ -1,0 +1,21 @@
+ELK
+----------------------------------------------------------------------------------------------------------------------------------
+E = Elasticsearch 
+Elasticsearch is an open-source, RESTful, distributed search and analytics engine built on Apache Lucene. 
+Support for various languages, high performance, and schema-free JSON documents makes Elasticsearch an ideal
+choice for various log analytics and search use cases
+L = Logstash
+Logstash is an open-source data ingestion tool that allows you to collect data from a variety of sources, 
+transform it, and send it to your desired destination. With pre-built filters and support for over 200 plugins, 
+Logstash allows users to easily ingest data regardless of the data source or type.
+K = Kibana
+Kibana is an open-source data visualization and exploration tool for reviewing logs and events. 
+Kibana offers easy-to-use, interactive charts, pre-built aggregations and filters, and geospatial support and 
+making it the preferred choice for visualizing data stored in Elasticsearch
+Why is the ELK stack so popular?
+The ELK Stack is popular because it fulfills a need in the log analytics space. 
+As more and more of your IT infrastructure move to public clouds, you need a log management and analytics solution 
+to monitor this infrastructure as well as process any server logs, application logs, and clickstreams. 
+The ELK stack provides a simple yet robust log analysis solution for your developers and DevOps engineers 
+to gain valuable insights on failure diagnosis, application performance, and infrastructure monitoring – at a fraction of the price.
+------------------------------------------------------------------------------------------------------------------------------------
