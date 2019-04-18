@@ -1,0 +1,113 @@
+#!groovy
+pipeline {
+    agent { label 'DSLAVE' }
+
+    options {
+        skipDefaultCheckout()
+    }
+	
+    stages {
+		stage('Init Var') {
+			steps {
+				script {
+					env.buildtype = ""
+					/* echo "Accepted build fro branch => $	"
+					if ("$BRANCH_NAME" == "origin/master")
+    					buildtype = "dbsprod"
+					else if ("$BRANCH_NAME" == "origin/uat")
+    					buildtype = "dbsuat"
+					else */
+    					buildtype = "dbsdev"
+				}
+			}
+		}
+
+        stage('Clone') {
+	        steps {
+	            script {
+                    STAGE_NAME="Clone"
+                    gitInfo = checkout scm
+                    String GITCOMMIT = sh( script: 'git rev-parse --short HEAD', returnStdout: true).trim().tokenize(' ').last().trim()
+                    echo "____git commit_________"
+                    echo "$GITCOMMIT"
+                    env.GIT_COMMIT=GITCOMMIT
+                    echo "$gitInfo.GIT_COMMIT"
+	            }
+            }
+        }
+
+
+	/*	 stage('Unit Tets') {
+	        steps {
+                sh "echo '******************* PHP Tests Begin*************************'"
+                sh "pwd"
+				sh "cd $WORKSPACE/application/tests"
+				sh "phpunit"
+				sh "echo '******************* Completed running test cases *************************"
+				
+				sh "echo '******************* Test Reports *************************"
+				sh "pwd $WORKSPACE/application/tests/build/logs/clover.xml"
+				sh "pwd $WORKSPACE/application/tests/build/logs/junit.xml"
+	        }
+        } 
+	*/
+   /* stage('Sonar Scan') {
+            steps {
+              	script {
+					String TEST_COVERAGE_PATH=WORKSPACE+"/application/tests/build/logs/clover.xml"
+					String TEST_REPORT_PATH=WORKSPACE+"/application/tests/build/logs/junit.xml"
+					Map mp =[ 	commitID: gitInfo.GIT_COMMIT,
+									branch: gitInfo.GIT_BRANCH,
+									repourl: gitInfo.GIT_URL,
+									"sonar.projectKey": "RTMP_HPP_PAYLAH_ADMIN",
+									"sonar.projectName": "RTMP_HPP_PAYLAH_ADMIN",
+									//sonar.php.coverage.reportPaths=TEST_COVERAGE_PATH
+									//sonar.php.tests.reportPath=TEST_REPORT_PATH
+									"sonar.sources": ".",
+									qualityGateCheck: false
+					]
+						echo "performSonarScan......................"		
+						performSonarScan(mp)
+				}
+					
+            }          
+        }*/
+          /* stage('fortify') {
+             steps {
+               	script {
+		 			sh "echo perform scan"
+		 			Map mp = [
+      	 				commitID: gitInfo.GIT_COMMIT,
+		 				branch: gitInfo.GIT_BRANCH,
+		 				repourl: gitInfo.GIT_URL, 
+						fortifyProjectName: "RTMP",
+						fortifyVersionName: "RTMP_hpp_paylah_admin",
+		 				buildType: "others"
+		             ]
+		 			echo "Performing Fortify Scan......................"		
+		 			performFortifyScan(mp)
+		 		}					
+             }            
+         }
+		*/
+		stage('Evolve Checkout'){
+			steps {  
+				script {	  
+					git branch: "master", credentialsId: "b908cf13-35bb-4e2e-8781-56959264d385", url: "https://bitbucket.sgp.dbs.com:8443/dcifgit/scm/dcif_cloud/evolve-jenkins-shared.git"
+					checkout scm
+					sh "ls *"
+					jenkins = load 'evolve-jenkins-shared/vars/evolvePipeline.groovy'
+				}
+			  //jenkins.evolvePipeline()
+			}
+		}
+		stage("Deploy Application via Evolve Pipeline") {
+        	steps {              
+                script {
+                def evolveProps = ['SOURCE_DIR':"${WORKSPACE}", 'BRANCH':gitInfo.GIT_BRANCH, 'PORTFOLIO':'rtmp', 'APP':'hpp_paylah_admin', 'TASKS':'package upload compile deploy']
+                jenkins.evolvePipeline(evolveProps)
+				}
+			}
+		}
+    }
+}
