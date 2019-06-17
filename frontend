@@ -1,0 +1,301 @@
+
+SET BACKEND=palo && SET WITH=CARS,PROPERTY,TRAVEL,HOTEL,LOGIN,1FA, && npm run start:win -- --config .webpack/webpack.dev.js
+
+
+SET BACKEND=palo && SET WITH=CARS,PROPERTY,TRAVEL,HOTEL,LOGIN,1FA, && npm run start:win -- --config .webpack/webpack.dev2.js
+
+
+
+SET WITH=CARS,PROPERTY,TRAVEL,HOTEL,LOGIN,1FA, && npm run start:win -- --config .webpack/webpack.dev3.js
+
+
+SET BACKEND=dev && SET WITH=CARS,PROPERTY,TRAVEL,HOTEL,FLIGHT,LOGIN, && npm run start:win -- --config .webpack/webpack.dev3.js
+
+
+SET BACKEND=dev && SET WITH=CARS,PROPERTY,TRAVEL,HOTEL,FLIGHT,LOGIN, && npm run start:win -- --config .webpack/webpack.uat-sit1.js
+
+
+SET BACKEND=dev && SET WITH=CARS,PROPERTY,TRAVEL,HOTEL,FLIGHT,LOGIN, && npm run start:win -- --config .webpack/webpack.uat-sit2.js 
+
+
+SET BACKEND=dev && SET WITH=CARS,PROPERTY,TRAVEL,HOTEL,FLIGHT,LOGIN, && npm run start:win -- --config .webpack/webpack.sit1.js
+
+
+SET BACKEND=dev && SET WITH=CARS,PROPERTY,TRAVEL,HOTEL,FLIGHT,LOGIN, && npm run start:win -- --config .webpack/webpack.sit1.js
+
+
+
+ 
+
+
+
+http://lvh.me:3000/personal/devmarketplace/
+
+
+
+
+
+
+ssh -c aes256-cbc -o StrictHostKeyChecking=no -i DBS-MktPlace-Palo-Bastion.pem ivcp@bastion.sin.services.nonprod.c0.dbs.com
+
+
+ssh -i rtmp_rsa.pem rtmp@bastion.sin.services.nonprod.c0.dbs.com
+
+ssh -i key-uat-sg-s-rtmp.pem ec2-user@10.116.75.7
+
+
+ssh -i key-dev-sg-s-rtmp.pem ec2-user@10.116.75.7
+
+
+
+
+aws lambda invoke --function-name rtmp-api-hotel-uat-sit1-dataload --invocation-type Event --log-type Tail --payload {} lambda.out
+
+
+
+
+
+
+
+
+rtmp-api-hotel-uat-sit1-autocomplete
+
+
+
+rtmp-analytics
+rtmp-api-car
+rtmp-api-customer
+rtmp-api-hotel
+rtmp-api-property
+rtmp-apigateway
+rtmp-authentication
+rtmp-common-lambdas
+rtmp-etl-fetch-property
+rtmp-notification
+
+rtmp-payment-handler
+rtmp-traveller-info
+rtmp-transation-history
+
+
+
+
+
+
+
+ Description / Objective / Impact Analysis
+State
+(A) Describe what this change request is about
+
+CR to Promote  enhancement change for DBS Marketplace project  following 
+
+onboarding property partners orangetee and ERA 
+fixes for travel market place mobile redesign
+prod fix for travel navigation bar showing car and property also
+
+
+
+
+CURL:   http calls 
+
+
+
+
+Description / Objective / Impact Analysis
+State
+(A) Describe what this change request is about
+
+CR to Promote  enhancement change for DBS Marketplace project  Pilot following 
+
+
+
+
+EASRECDOperations@dbs.com
+
+
+mp developers(mp_dev_spartons)
+
+
+
+
+
+
+
+
++65 82021185    rohit
+
+
+
+10 6      10 4    4 6
+
+
+
+
+
+
+1) https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-analytics_master/
+2) https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-api-car_master/
+3) https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-api-customer_master/
+4) https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-api-hotel_master/
+5) https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-api-property_master/
+6) https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-apigateway_master/
+7) https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-authentication_master/
+8) https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-etl-fetch-property_master/
+9) https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-notification_master/
+10)https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-common_master
+11)https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-release_master/
+12) https://jenkinsm.sgp.dbs.com:8443/dcifjenkins/job/RTMP/job/rtmp-teardown_master/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+implementing orange tee extraction logic in ec2
+
+
+transforming existing orange tee extract lambdas into ec2 application
+
+
+Promoting Marketplace OrangeTee partner onboarding fixes
+
+
+
+
+
+
+
+
+
+config-resources complainces status
+
+
+
+201967Mace
+
+
+
+
+
++65 82021185    rohit
++65 98808573    Omair
+98523756        sateesh
+
+
+
+Replace the  updateBitBucket(gitInfo.GIT_COMMIT) with    updateBitBucket([commitID:gitInfo.GIT_COMMIT])
+
+
+
+
+
+
+
+
+
+analytics
+api-car
+api-customer
+api-hotel
+api-property
+apigateway
+authentication
+common-lambdas
+etl-fetch-property
+notification
+
+
+
+prasanth
+
+
+api-hotel
+api-gateway- not needed
+authentication -- no such file
+
+
+
+
+ stage('RA Deploy') {
+      steps {
+	        script {
+	          echo "Starting Deploy"
+              runDeploy(modules, REPO_NAME)
+	        }
+	      }
+	    } 
+
+
+
+
+
+
+def runDeploy(modulelist, repo_name) {
+  BRANCH_NAME = BRANCH_NAME.replaceAll('/', '_')
+  for (int i = 0; i < modulelist.size(); i++) {
+    echo "Running DEPLOY for ${modulelist[i]}"
+    def values=modulelist[i].split('/')
+    LOB=values[0]
+    APPLICATION=values[1]
+    echo "Call RA Deploy Job with Params: REPO_NAME=${repo_name} LOB=${LOB} APPLICATION=${APPLICATION} RELEASE_VERSION=${RELEASE_VERSION} ENV=${TARGET_ENV} BRANCH_NAME=${BRANCH_NAME}"
+
+    build job: "${DEPLOY_JOB}",
+    parameters: [
+        string(name: 'REPO_NAME', value: "${repo_name}"),
+        string(name: 'LOB', value: "${LOB}"),
+        string(name: 'APPLICATION', value: "${APPLICATION}"),
+        string(name: 'RELEASE_VERSION', value: "${RELEASE_VERSION}"),
+        string(name: 'ENV', value: "${TARGET_ENV}"),
+        string(name: 'KEY', value: "${repo_name}_${BRANCH_NAME}")
+    ]
+  }
+} 
+ 
+
+
+
+
+
+
+
+
+1. install CA release automation tool agent in target servers.
+2. 
+
+
+https://rafmgmt.sgp.dbs.com:8443/datamanagement/index.jsp#/main/deployments 
+ 
+
+
+
+sonar.surefire.reportsPath=target/surefire-reports
+
+
+
+
+sonar.jacoco.reportPath=target/jacoco.exec
+
+
+
+
+sonar.binaries=target/classes
+sonar.coverage.jacoco.xmlReportPaths=<unit test path>
+
+
+
+
+
+
+
