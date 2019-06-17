@@ -30,6 +30,33 @@ this project is parameterized
 how to reactivate deleted job  --    http://[url_of_jenkins]/jobConfigHistory/?filter=deleted
 forgot jenkins password
 
+################without-fail###########################################3
+def noFail(run) {
+    try {
+        return run()
+    } catch(e) {
+        echo "*** FAILED ***"
+    }
+} 
+def publish(name, dirName, indexFileName = 'index.html') {
+
+publishHTML target: [
+
+allowMissing : false,
+
+alwaysLinkToLastBuild: false,
+
+keepAll : true,
+
+reportDir : dirName,
+
+reportFiles : indexFileName,
+
+reportName : name
+
+]
+
+   }
 
 
 
