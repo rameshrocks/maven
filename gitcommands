@@ -72,6 +72,7 @@ git show release3.2.1
 git tag                  
 git push --tags
 git tag -d release3.2.1
+git remote prune origin --dry-run (Another way is to prune all stale branches from your local repository. This will delete all local branches that already have been removed from the remote)
 
  
 
