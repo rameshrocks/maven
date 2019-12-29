@@ -4,10 +4,15 @@ node
          stage('SCM'){
         
                    checkout([$class: 'GitSCM', 
-                   branches: [[name: '$master']], 
+                   branches: [[name: '*/master']], 
                    doGenerateSubmoduleConfigurations: false, 
                    extensions: [],
                    submoduleCfg: [],
                    userRemoteConfigs: [[url: 'https://github.com/rameshrocks/maven.git']]])
+               }
+               stage('build'){
+                   sh"""
+                      mvn clean package
+                      """
                }
      }  
