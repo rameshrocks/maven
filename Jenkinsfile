@@ -4,7 +4,7 @@ node
          stage('SCM'){
         
                    checkout([$class: 'GitSCM', 
-                   branches: [[name: '$BRANCH']], 
+                   branches: [[name: '$master']], 
                    doGenerateSubmoduleConfigurations: false, 
                    extensions: [],
                    submoduleCfg: [],
