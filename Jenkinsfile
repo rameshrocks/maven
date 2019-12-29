@@ -4,9 +4,7 @@ pipeline{
       stage("SCM){
            steps{
                script{
-                   STAGE_NAME="SCM"
-                   gitinfo = checkout scm
-                   echo "$gitinfo.GIT_COMMIT"
+                   Scheckout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/rameshrocks/maven.git']]])
                }
            }
       }
