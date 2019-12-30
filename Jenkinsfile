@@ -1,8 +1,6 @@
 node
-     
-     {
+         {
          stage('SCM'){
-        
                    checkout([$class: 'GitSCM', 
                    branches: [[name: '*/master']], 
                    doGenerateSubmoduleConfigurations: false, 
@@ -17,9 +15,8 @@ node
                       ls -lrt ${workspace}/target
                       cd ${workspace}/target
                       zip -r ${workspace}/deploy.zip *.jar
-                      
                       """
                }
                cleanWs()
-     }  
+          }  
      
