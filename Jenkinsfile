@@ -12,7 +12,14 @@ node
                }
                stage('build'){
                    sh"""
-                      mvn clean package
+                      mvn clean package -DskipTests=true
+                      ls -lrt
+                      ls -lrt ${workspace}/target
+                      cd ${workspace}/target
+                      zip -r ${workspace}/deploy.zip *.jar
+                      
                       """
                }
+               cleanWs()
      }  
+     
